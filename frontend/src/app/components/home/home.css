@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.home-page {
+  min-height: 100vh;
+  background: #f7faf7;
+  color: #14251b;
+  font-family: 'DM Sans', sans-serif;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  padding: 80px 8%;
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(65, 145, 83, 0.16),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #f5faf4,
+      #e8f3e9
+    );
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 900px;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #277342;
+}
+
+.hero h1 {
+  max-width: 720px;
+  margin: 0;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -3px;
+  font-weight: 700;
+}
+
+.hero h1 span {
+  color: #2d7a43;
+}
+
+.hero p {
+  max-width: 600px;
+  margin: 24px 0 30px;
+  color: #637269;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+
+/* Search */
+
+.search-box {
+  display: flex;
+  max-width: 680px;
+  padding: 6px;
+  background: white;
+  border: 1px solid #dce7de;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(30, 70, 40, 0.08);
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  padding: 15px 18px;
+  background: transparent;
+  font: inherit;
+  color: #17251c;
+}
+
+.search-box input::placeholder {
+  color: #9aa89e;
+}
+
+.search-box button {
+  border: none;
+  border-radius: 11px;
+  padding: 0 26px;
+  background: #236b3c;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.search-box button:hover {
+  background: #19562f;
+}
+
+.location {
+  margin-top: 15px;
+  color: #718078;
+  font-size: 13px;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.categories,
+.nearby {
+  max-width: 1200px;
+  margin: auto;
+  padding: 70px 30px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: -1px;
+}
+
+.section-heading a {
+  color: #277342;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.category-card {
+  padding: 25px;
+  min-height: 170px;
+  background: white;
+  border: 1px solid #e2ebe4;
+  border-radius: 18px;
+  transition: 0.25s;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  border-color: #b7d5bd;
+  box-shadow: 0 15px 30px rgba(30, 70, 40, 0.08);
+}
+
+.category-icon {
+  display: inline-flex;
+  padding: 7px 10px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  background: #edf7ef;
+  color: #277342;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.category-card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.category-card p {
+  margin: 0;
+  color: #718078;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* =========================
+   BUSINESSES
+========================= */
+
+.business-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.business-card {
+  overflow: hidden;
+  background: white;
+  border: 1px solid #e2ebe4;
+  border-radius: 18px;
+  transition: 0.25s;
+}
+
+.business-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(30, 70, 40, 0.09);
+}
+
+.business-image {
+  height: 180px;
+  background:
+    linear-gradient(
+      135deg,
+      #dcebdd,
+      #bcd6c1
+    );
+}
+
+.business-info {
+  padding: 22px;
+}
+
+.business-category {
+  color: #277342;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.business-info h3 {
+  margin: 8px 0;
+  font-size: 21px;
+}
+
+.business-info p {
+  margin: 0 0 15px;
+  color: #718078;
+  line-height: 1.5;
+}
+
+.business-meta {
+  color: #277342;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+  .hero {
+    min-height: 470px;
+    padding: 60px 25px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    letter-spacing: -2px;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .business-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 520px) {
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .search-box {
+    flex-direction: column;
+    padding: 8px;
+  }
+
+  .search-box button {
+    height: 48px;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .categories,
+  .nearby {
+    padding: 50px 20px;
+  }
+
+  .section-heading h2 {
+    font-size: 26px;
+  }
+
+}

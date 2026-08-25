@@ -1,0 +1,809 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
+
+
+:root {
+    --forest: #1f4e36;
+    --forest-dark: #163b29;
+    --green: #2d7047;
+    --sage: #e5f1e5;
+    --cream: #fbf8f0;
+    --ink: #17221c;
+    --muted: #718078;
+    --border: #dfe5df;
+}
+
+
+/* ================================
+   RESET
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ================================
+   PAGE
+================================ */
+
+.login-page {
+
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 28px;
+
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(45,112,71,.08),
+            transparent 30%
+        ),
+        #f1eee7;
+
+    font-family: 'DM Sans', sans-serif;
+
+}
+
+
+/* ================================
+   MAIN CARD
+================================ */
+
+.login-card {
+
+    width: min(1040px, 100%);
+
+    min-height: 610px;
+
+    display: grid;
+
+    grid-template-columns: 44% 56%;
+
+    overflow: hidden;
+
+    border-radius: 26px;
+
+    background: #fff;
+
+    box-shadow:
+        0 30px 80px rgba(24, 50, 37, .14),
+        0 2px 8px rgba(24, 50, 37, .05);
+
+}
+
+
+/* ================================
+   LEFT VISUAL
+================================ */
+
+.login-visual {
+
+    position: relative;
+
+    min-height: 610px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #dcebdc,
+            #bdd8c0
+        );
+
+}
+
+
+/* Decorative circles */
+
+.login-visual::before {
+
+    content: '';
+
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.28);
+
+    top: -150px;
+    left: -150px;
+
+}
+
+
+.login-visual::after {
+
+    content: '';
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    background: rgba(31,78,54,.07);
+
+    right: -120px;
+    bottom: -100px;
+
+}
+
+
+/* Content */
+
+.visual-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    height: 100%;
+
+    padding: 38px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+}
+
+
+/* ================================
+   BRAND
+================================ */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--forest);
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+}
+
+
+.brand-mark {
+
+    width: 27px;
+    height: 27px;
+
+    display: block;
+
+    border-radius: 50%;
+
+    background: var(--forest);
+
+    position: relative;
+
+}
+
+
+.brand-mark::after {
+
+    content: '';
+
+    position: absolute;
+
+    width: 9px;
+    height: 14px;
+
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+
+    transform: rotate(-45deg);
+
+    left: 8px;
+    top: 5px;
+
+}
+
+
+/* ================================
+   VISUAL COPY
+================================ */
+
+.visual-copy {
+
+    max-width: 340px;
+
+    margin-bottom: 35px;
+
+}
+
+
+.eyebrow {
+
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: var(--green);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.6px;
+
+}
+
+
+.visual-copy h2 {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: clamp(32px, 4vw, 48px);
+
+    line-height: 1.08;
+
+    font-weight: 500;
+
+    color: var(--ink);
+
+    margin-bottom: 18px;
+
+}
+
+
+.visual-copy h2 em {
+
+    color: var(--forest);
+
+    font-style: normal;
+
+}
+
+
+.visual-copy p {
+
+    color: #53665a;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+}
+
+
+/* ================================
+   RIGHT FORM
+================================ */
+
+.login-form-section {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 50px 70px;
+
+    background: #fff;
+
+}
+
+
+.login-form-container {
+
+    width: 100%;
+
+    max-width: 430px;
+
+}
+
+
+/* Mobile brand hidden */
+
+.mobile-brand {
+
+    display: none;
+
+}
+
+
+/* ================================
+   HEADING
+================================ */
+
+.heading {
+
+    margin-bottom: 32px;
+
+}
+
+
+.heading .eyebrow {
+
+    margin-bottom: 9px;
+
+}
+
+
+.heading h1 {
+
+    color: var(--ink);
+
+    font-size: 30px;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    letter-spacing: -.6px;
+
+    margin-bottom: 9px;
+
+}
+
+
+.heading p {
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.form-group {
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #334239;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+/* Label row */
+
+.label-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+
+}
+
+
+.label-row label {
+
+    margin-bottom: 0;
+
+}
+
+
+.forgot-link {
+
+    color: var(--green);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+}
+
+
+.forgot-link:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* Inputs */
+
+.form-group input[type="email"],
+.form-group input[type="password"],
+.password-wrapper input {
+
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 15px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 11px;
+
+    background: #fbfcfb;
+
+    color: var(--ink);
+
+    font-family: 'DM Sans', sans-serif;
+
+    font-size: 14px;
+
+    transition: .2s ease;
+
+}
+
+
+.form-group input::placeholder {
+
+    color: #a2ada5;
+
+}
+
+
+.form-group input:focus {
+
+    outline: none;
+
+    border-color: var(--forest);
+
+    background: #fff;
+
+    box-shadow:
+        0 0 0 4px rgba(31,78,54,.09);
+
+}
+
+
+/* ================================
+   PASSWORD
+================================ */
+
+.password-wrapper {
+
+    position: relative;
+
+}
+
+
+.password-wrapper input {
+
+    padding-right: 70px;
+
+}
+
+
+.password-toggle {
+
+    position: absolute;
+
+    right: 13px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: none;
+
+    color: var(--green);
+
+    font-family: 'DM Sans', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+/* ================================
+   REMEMBER
+================================ */
+
+.login-options {
+
+    margin: 3px 0 23px;
+
+}
+
+
+.remember {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+}
+
+
+.remember input {
+
+    width: 15px;
+    height: 15px;
+
+    accent-color: var(--forest);
+
+}
+
+
+/* ================================
+   LOGIN BUTTON
+================================ */
+
+.btn-login {
+    width: 100%;
+    height: 52px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #1f5a3f;
+    color: #ffffff;
+
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 20px rgba(31, 90, 63, 0.18);
+
+    transition: background 0.25s ease,
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+.btn-login span {
+    color: #ffffff;
+}
+
+.btn-arrow {
+    font-size: 20px;
+    line-height: 1;
+    transition: transform 0.25s ease;
+}
+
+.btn-login:hover {
+    background: #174831;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(31, 90, 63, 0.25);
+}
+
+.btn-login:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+/* ================================
+   REGISTER LINK
+================================ */
+
+.register-link {
+
+    margin-top: 25px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+}
+
+
+.register-link a {
+
+    color: var(--forest);
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+}
+
+
+.register-link a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 850px) {
+
+    .login-card {
+
+        grid-template-columns: 1fr;
+
+        max-width: 520px;
+
+    }
+
+
+    .login-visual {
+
+        min-height: 220px;
+
+    }
+
+
+    .visual-content {
+
+        padding: 28px;
+
+    }
+
+
+    .visual-copy {
+
+        margin: 0;
+
+        max-width: 420px;
+
+    }
+
+
+    .visual-copy h2 {
+
+        font-size: 34px;
+
+        margin-bottom: 10px;
+
+    }
+
+
+    .visual-copy p {
+
+        display: none;
+
+    }
+
+
+    .login-form-section {
+
+        padding: 38px;
+
+    }
+
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 520px) {
+
+    .login-page {
+
+        padding: 12px;
+
+        align-items: flex-start;
+
+    }
+
+
+    .login-card {
+
+        margin-top: 10px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .login-visual {
+
+        display: none;
+
+    }
+
+
+    .login-form-section {
+
+        padding: 35px 24px;
+
+    }
+
+
+    .mobile-brand {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        margin-bottom: 30px;
+
+        color: var(--forest);
+
+        font-size: 19px;
+
+        font-weight: 700;
+
+    }
+
+
+    .heading h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .heading {
+
+        margin-bottom: 27px;
+
+    }
+
+
+    .register-link {
+
+        flex-direction: column;
+
+        align-items: center;
+
+    }
+
+}

@@ -1,0 +1,222 @@
+<div class="container">
+
+    <div class="register-card">
+
+        <!-- LEFT PANEL -->
+
+        <div class="left-panel">
+
+            <div class="brand">
+                <h3>NearNest</h3>
+            </div>
+            <div class="heading">
+
+                <h1>Create your account</h1>
+                <p>
+                    Join NearNest to discover and support trusted local
+                    businesses in your neighbourhood.
+                </p>
+
+            </div>
+
+            <form (ngSubmit)="register()">
+
+                <!-- Full Name -->
+
+                <div class="form-group">
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        [(ngModel)]="name"
+                        placeholder="Enter your full name"
+                        required>
+
+                </div>
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        [(ngModel)]="email"
+                        placeholder="Enter your email"
+                        required>
+
+                </div>
+
+                <!-- Password -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            id="password"
+                            [type]="showPassword ? 'text' : 'password'"
+                            name="password"
+                            class="form-control"
+                            [(ngModel)]="password"
+                            placeholder="Create a password"
+                            required>
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            (click)="togglePassword()">
+
+                            <span class="material-symbols-outlined">
+                                {{ showPassword ? 'visibility_off' : 'visibility' }}
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Account Type -->
+
+                <div class="account-section">
+
+                    <label class="section-title">
+                        Account Type
+                    </label>
+
+                    <div class="account-options">
+
+                        <div
+                            class="account-card"
+                            [class.active]="role === 'USER'"
+                            (click)="role='USER'">
+
+                            <h4>Customer</h4>
+
+                            <p>
+                                Discover nearby businesses and shop locally.
+                            </p>
+
+                        </div>
+
+                        <div
+                            class="account-card"
+                            [class.active]="role === 'BUSINESS'"
+                            (click)="role='BUSINESS'">
+
+                            <h4>Business</h4>
+
+                            <p>
+                                Showcase your products and reach local customers.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Future Business Fields -->
+
+                <div *ngIf="role === 'BUSINESS'">
+
+                    <div class="form-group">
+
+                        <label>
+                            Business Name
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="businessName"
+                            placeholder="Enter business name">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Business Category
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="category"
+                            placeholder="Example: Bakery">
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn-register">
+
+                    Create Account
+
+                </button>
+
+            </form>
+
+            <div class="login-link">
+
+                Already have an account?
+
+                <a routerLink="/login">
+
+                    Sign In
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT PANEL -->
+
+        <div class="right-panel">
+
+            <div class="illustration">
+
+                <img
+                    src="images/img1.png"
+                    alt="NearNest">
+
+            </div>
+
+            <div class="hero-text">
+
+                <h2>
+                    Empower Local Businesses
+                </h2>
+
+                <p>
+                    Connect with trusted businesses nearby, discover unique
+                    products, and support your local community through NearNest.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
