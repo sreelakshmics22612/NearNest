@@ -19,11 +19,15 @@ public class SecurityConfig {
 
         http
                 .csrf(csrf -> csrf.disable())
+
                 .cors(Customizer.withDefaults())
+
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
-                        .anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults());
+                        .requestMatchers("/api/categories/**").permitAll()
+                        .requestMatchers("/api/businesses/**").permitAll()
+                        .anyRequest().permitAll()
+                );
 
         return http.build();
     }
@@ -33,13 +37,29 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+       configuration.setAllowedOriginPatterns(
+        List.of("http://localhost:*")
+        );
+
+        configuration.setAllowedMethods(
+        List.of(
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
+                "OPTIONS"
+        )
+        );
+
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource();
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration(
+                "/**",
+                configuration
+        );
 
         return source;
     }

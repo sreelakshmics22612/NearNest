@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface LoginResponse {
+  userId: number;
+  role: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,12 +26,11 @@ export class AuthService {
 
   }
 
-  login(credentials: any): Observable<any> {
+  login(credentials: any): Observable<LoginResponse> {
 
-    return this.http.post(
+    return this.http.post<LoginResponse>(
       `${this.apiUrl}/login`,
-      credentials,
-      { responseType: 'text' }
+      credentials
     );
 
   }

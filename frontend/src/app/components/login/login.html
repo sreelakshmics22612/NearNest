@@ -1,53 +1,91 @@
 <div class="login-page">
 
-  <div class="login-card">
+  <main class="login-shell">
 
-    <!-- LEFT: Visual panel -->
-    <section class="login-visual">
+    <!-- =========================
+         LEFT: BRAND / IMAGE
+         ========================= -->
+    <section class="visual-panel">
 
-      <div class="visual-overlay"></div>
+      <!-- Decorative shapes -->
+      <div class="shape shape-one"></div>
+      <div class="shape shape-two"></div>
+      <div class="shape shape-three"></div>
 
-      <div class="visual-content">
+      <!-- Brand -->
+      <a class="brand" routerLink="/">
+        <span class="brand-mark">N</span>
+        <span>NearNest</span>
+      </a>
 
-        <div class="brand">
-          <span class="brand-mark"></span>
-          <span>NearNest</span>
+      <!-- Main image -->
+      <div class="hero-image">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata">
+          <source src="/images/v1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- Small category label -->
+      <div class="image-tag">
+        <span class="tag-dot"></span>
+        LOCAL BUSINESS
+      </div>
+
+      <!-- Editorial copy -->
+      <div class="visual-copy">
+
+        <div class="eyebrow">
+          MADE CLOSE TO HOME
         </div>
 
-        <div class="visual-copy">
-          <span class="eyebrow">LOCAL • TRUSTED • NEARBY</span>
+        <h2>
+          
+          Meet the
+          <em>people</em>
+          behind your
+          neighbourhood.
+        </h2>
 
-          <h2>
-            Your neighbourhood,
-            <em>closer.</em>
-          </h2>
+        <p>
+          Discover homegrown businesses, handmade products
+          and people doing something special right around you.
+        </p>
 
-          <p>
-            Find trusted local businesses, discover new places,
-            and stay connected with the community around you.
-          </p>
-        </div>
+      </div>
 
+      <!-- Image counter -->
+      <div class="image-number">
+        <span>01</span>
+        <i></i>
+        04
       </div>
 
     </section>
 
 
-    <!-- RIGHT: Login form -->
-    <section class="login-form-section">
+    <!-- =========================
+         RIGHT: LOGIN
+         ========================= -->
+    <section class="form-panel">
 
-      <div class="login-form-container">
+      <div class="form-content">
 
-        <div class="mobile-brand">
-          <span class="brand-mark"></span>
-          <span>NearNest</span>
-        </div>
+        <div class="form-top">
 
-        <div class="heading">
+          <div class="small-label">
+            WELCOME BACK
+          </div>
 
-          <span class="eyebrow">WELCOME BACK</span>
-
-          <h1>Sign in to NearNest</h1>
+          <h1>
+            Sign in to
+            <em>NearNest.</em>
+          </h1>
 
           <p>
             Continue discovering businesses around you.
@@ -56,31 +94,38 @@
         </div>
 
 
+        <!-- KEEP LOGIN LOGIC -->
         <form (ngSubmit)="login()">
 
-          <!-- Email -->
-
-          <div class="form-group">
+          <!-- EMAIL -->
+          <div class="field">
 
             <label for="email">
               Email address
             </label>
 
-            <input
-              id="email"
-              type="email"
-              name="email"
-              [(ngModel)]="email"
-              placeholder="you@example.com"
-              autocomplete="email"
-              required>
+            <div class="input-wrap">
+
+              <span class="input-number">
+                01
+              </span>
+
+              <input
+                id="email"
+                type="email"
+                name="email"
+                [(ngModel)]="email"
+                placeholder="you@example.com"
+                required
+              />
+
+            </div>
 
           </div>
 
 
-          <!-- Password -->
-
-          <div class="form-group">
+          <!-- PASSWORD -->
+          <div class="field password-field">
 
             <div class="label-row">
 
@@ -88,13 +133,20 @@
                 Password
               </label>
 
-              <a href="#" class="forgot-link">
+              <button
+                type="button"
+                class="forgot"
+              >
                 Forgot password?
-              </a>
+              </button>
 
             </div>
 
-            <div class="password-wrapper">
+            <div class="input-wrap password-input">
+
+              <span class="input-number">
+                02
+              </span>
 
               <input
                 id="password"
@@ -102,17 +154,15 @@
                 name="password"
                 [(ngModel)]="password"
                 placeholder="Enter your password"
-                autocomplete="current-password"
-                required>
+                required
+              />
 
               <button
                 type="button"
-                class="password-toggle"
-                (click)="togglePassword()"
-                [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
-
+                class="show-password"
+                (click)="showPassword = !showPassword"
+              >
                 {{ showPassword ? 'Hide' : 'Show' }}
-
               </button>
 
             </div>
@@ -120,47 +170,78 @@
           </div>
 
 
-          <!-- Remember -->
-
-          <div class="login-options">
+          <!-- REMEMBER -->
+          <div class="remember-row">
 
             <label class="remember">
 
               <input
                 type="checkbox"
-                name="remember">
+                name="remember"
+              />
 
-              <span>Remember me</span>
+              <span class="custom-check"></span>
+
+              <span>
+                Remember me
+              </span>
 
             </label>
 
           </div>
 
 
-          <!-- Login -->
-
+          <!-- LOGIN BUTTON -->
           <button
             type="submit"
-            class="btn-login">
+            class="login-button"
+          >
 
-            <span>Sign in</span>
+            <span>
+              Sign in
+            </span>
 
-            <span class="btn-arrow">→</span>
+            <span class="arrow">
+              ↗
+            </span>
 
           </button>
 
         </form>
 
 
-        <!-- Register -->
-
+        <!-- REGISTER -->
         <div class="register-link">
 
-          <span>Don't have an account?</span>
+          <span>
+            Don't have an account?
+          </span>
 
           <a routerLink="/register">
+
             Create an account
+
+            <span class="register-arrow">
+              →
+            </span>
+
           </a>
+
+        </div>
+
+
+        <!-- FOOTER -->
+        <div class="form-footer">
+
+          <span>
+            NEARNEST
+          </span>
+
+          <div class="footer-line"></div>
+
+          <span>
+            DISCOVER LOCAL
+          </span>
 
         </div>
 
@@ -168,6 +249,6 @@
 
     </section>
 
-  </div>
+  </main>
 
 </div>

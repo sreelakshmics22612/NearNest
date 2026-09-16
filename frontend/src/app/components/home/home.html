@@ -1,197 +1,625 @@
 <div class="home-page">
 
-  <!-- Hero -->
-  <section class="hero">
+  <!-- ================= NAVBAR ================= -->
 
-    <div class="hero-content">
+  <header class="navbar">
 
-      <span class="eyebrow">
-        DISCOVER LOCAL
-      </span>
+    <a class="brand" routerLink="/">
+      <span class="brand-icon">N</span>
+      <span class="brand-name">NearNest</span>
+    </a>
 
-      <h1>
-        Everything you need,
-        <span>near you.</span>
-      </h1>
+    <nav class="nav-links">
+      <a href="#discover">Discover</a>
+      <a href="#categories">Categories</a>
+      <a href="#nearby">Nearby</a>
+    </nav>
 
-      <p>
-        Discover trusted local businesses, products and services
-        around your neighbourhood.
-      </p>
+    <div class="nav-right">
 
-      <!-- Search -->
-      <div class="search-box">
+      <button class="nav-location" (click)="useLocation()">
+        <span>⌖</span>
+        <span>Near me</span>
+      </button>
 
-        <input
-          type="text"
-          placeholder="Search businesses, shops or services">
+      <button class="nav-login" routerLink="/login">
+        Sign in <span>↗</span>
+      </button>
 
-        <button>
-          Search
+    </div>
+
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+
+  <main>
+
+    <section class="hero" id="discover">
+
+      <div class="hero-background-shape"></div>
+
+      <div class="hero-content">
+
+        <div class="hero-label">
+          <span></span>
+          DISCOVER LOCAL
+        </div>
+
+        <h1>
+          Good things are
+          <em>closer</em>
+          than you think.
+        </h1>
+
+        <p>
+          Find homegrown businesses, handmade products,
+          local services and the people behind them.
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div class="main-search">
+
+          <span class="search-symbol">⌕</span>
+
+          <input
+            type="text"
+            [(ngModel)]="searchText"
+            placeholder="What are you looking for?"
+            (keyup.enter)="search()"
+          />
+
+          <button (click)="search()">
+            Search
+            <span>↗</span>
+          </button>
+
+        </div>
+
+
+        <div class="hero-location">
+
+          <span class="location-dot"></span>
+
+          <span>{{ locationText }}</span>
+
+          <button (click)="useLocation()">
+            Use my location
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- HERO IMAGE -->
+
+      <div class="hero-visual">
+
+        <div class="hero-image-frame">
+
+          <img
+            src="/images/Cozy Crochet.jpg"
+            alt="Local NearNest business"
+          />
+
+        </div>
+
+        <div class="hero-image-tag">
+          <span>✦</span>
+          Made nearby
+        </div>
+
+        <div class="hero-distance">
+          <strong>1.2 km</strong>
+          <small>from your neighbourhood</small>
+        </div>
+
+        <div class="hero-number">
+          01
+          <span>/</span>
+          04
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= TRENDING STRIP ================= -->
+
+    <section class="trending">
+
+      <div class="trending-label">
+        <span>✦</span>
+        PEOPLE ARE LOOKING FOR
+      </div>
+
+      <div class="trending-items">
+
+        <button (click)="selectCategory('Food & Dining')">
+          Homemade food
+        </button>
+
+        <button (click)="selectCategory('Shopping')">
+          Handmade gifts
+        </button>
+
+        <button (click)="selectCategory('Beauty')">
+          Beauty
+        </button>
+
+        <button (click)="selectCategory('Candles&Fragrance')">
+          Candles & Fragrance
+        </button>
+
+        <button (click)="selectCategory('Art&RegionalCrafts')">
+          Art & Regional Crafts
         </button>
 
       </div>
 
-      <div class="location">
-        Discovering businesses near your location
+    </section>
+
+
+    <!-- ================= CATEGORIES ================= -->
+
+    <section class="categories-section" id="categories">
+
+      <div class="section-intro">
+
+        <div>
+          <span class="section-label">EXPLORE YOUR AREA</span>
+
+          <h2>
+            Find something
+            <em>local.</em>
+          </h2>
+        </div>
+
+        <p>
+          From everyday essentials to little discoveries,
+          explore businesses around your neighbourhood.
+        </p>
+
       </div>
 
-    </div>
 
-  </section>
+      <div class="category-grid">
+
+        <button
+          class="category-card category-large"
+          *ngFor="let category of categories"
+          (click)="selectCategory(category.name)"
+        >
+
+          <div class="category-image">
+
+             <!-- USE THE IMAGE FROM home.ts -->
+          <img
+            [src]="category.image"
+            [alt]="category.name"
+          />
 
 
-  <!-- Categories -->
+            <span class="category-overlay"></span>
 
-  <section class="categories">
+            <span class="category-arrow">↗</span>
 
-    <div class="section-heading">
+          </div>
 
-      <div>
-        <span class="eyebrow">EXPLORE</span>
+          <div class="category-info">
 
-        <h2>Browse categories</h2>
+            <div>
+              <strong>{{ category.name }}</strong>
+              <small>{{ category.count }} places nearby</small>
+            </div>
+
+          </div>
+
+        </button>
+
       </div>
 
-      <a href="#">
-        View all
-      </a>
-
-    </div>
+    </section>
 
 
-    <div class="category-grid">
+    <!-- ================= FEATURED ================= -->
 
-      <div class="category-card">
-        <div class="category-icon">Food</div>
-        <h3>Food & Dining</h3>
-        <p>Restaurants, cafes and local food</p>
+    <section class="featured-section">
+
+      <div class="featured-heading">
+
+        <div>
+          <span class="section-label">LOCAL FAVOURITES</span>
+
+          <h2>
+            Worth discovering.
+          </h2>
+        </div>
+
+        <button class="text-button">
+          View all businesses →
+        </button>
+
       </div>
 
-      <div class="category-card">
-        <div class="category-icon">Shopping</div>
-        <h3>Shopping</h3>
-        <p>Local shops and stores</p>
+
+      <div class="featured-grid">
+
+        <article
+          class="featured-card"
+          *ngFor="let business of businesses"
+          (click)="openBusiness(business)"
+        >
+
+          <div class="featured-image">
+
+            <img
+               [src]="business.image"
+               [alt]="business.name"
+               loading="lazy"
+            />
+
+             <button
+              class="save-button"
+              type="button"
+              (click)="$event.stopPropagation()"
+            >
+              ♡
+            </button>
+             <span class="distance-pill">
+              {{ business.distance }} km
+            </span>
+          </div>
+
+
+          <div class="featured-info">
+
+            <div class="business-top">
+
+              <div>
+
+            <h3>
+              {{ business.name }}
+
+              <span
+                class="verified"
+                *ngIf="business.verified"
+              >
+                ✓
+              </span>
+            </h3>
+
+                <p>{{ business.category }}</p>
+
+              </div>
+
+              <span class="rating">
+                ★ {{ business.rating }}
+              </span>
+
+            </div>
+
+            <div class="business-bottom">
+
+              <span>
+                <span class="open-dot"></span>
+                {{ business.open ? 'Open nearby' : 'Closed' }}
+              </span>
+
+              <button>
+                Explore →
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
       </div>
 
-      <div class="category-card">
-        <div class="category-icon">Services</div>
-        <h3>Services</h3>
-        <p>Professionals near you</p>
+    </section>
+
+
+    <!-- ================= PEOPLE / STORY ================= -->
+
+    <section class="story-section">
+
+      <div class="story-image">
+
+        <img
+          src="/images/Kerala home based small business woman.jpg"
+          alt="People behind local businesses"
+        />
+
+        <div class="story-stamp">
+          <span>NEAR</span>
+          <strong>LOCAL</strong>
+          <span>TRUSTED</span>
+        </div>
+
       </div>
 
-      <div class="category-card">
-        <div class="category-icon">Health</div>
-        <h3>Health & Wellness</h3>
-        <p>Healthcare and wellness</p>
-      </div>
 
-    </div>
+      <div class="story-content">
 
-  </section>
-
-
-  <!-- Nearby Businesses -->
-
-  <section class="nearby">
-
-    <div class="section-heading">
-
-      <div>
-
-        <span class="eyebrow">
-          NEAR YOU
+        <span class="section-label">
+          MORE THAN A DIRECTORY
         </span>
 
-        <h2>Popular nearby</h2>
+        <h2>
+          Meet the people
+          <em>behind</em>
+          your neighbourhood.
+        </h2>
+
+        <p>
+          Every small business has a story. A kitchen,
+          a workshop, a studio or a shop built with care.
+          NearNest helps you discover the people who
+          make your neighbourhood special.
+        </p>
+
+        <div class="story-points">
+
+          <div>
+            <strong>01</strong>
+            <span>Discover businesses nearby</span>
+          </div>
+
+          <div>
+            <strong>02</strong>
+            <span>See what they actually make</span>
+          </div>
+
+          <div>
+            <strong>03</strong>
+            <span>Support your local community</span>
+          </div>
+
+        </div>
 
       </div>
 
-      <a href="#">
-        See all
-      </a>
+    </section>
+
+
+    <!-- ================= NEARBY ================= -->
+
+    <section class="nearby-section" id="nearby">
+
+      <div class="nearby-heading">
+
+        <div>
+
+          <span class="section-label">
+            AROUND YOU
+          </span>
+
+          <h2>
+            Businesses nearby
+            <em>right now.</em>
+          </h2>
+
+          <p>
+            {{ locationText }}
+          </p>
+
+        </div>
+
+
+        <select [(ngModel)]="sortOption">
+
+          <option value="nearest">
+            Nearest first
+          </option>
+
+          <option value="rating">
+            Highest rated
+          </option>
+
+          <option value="name">
+            Name
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="nearby-layout">
+
+        <!-- VISUAL MAP -->
+
+        <div class="map-card">
+
+          <div class="map-heading">
+            <strong>Explore nearby</strong>
+            <span>1.5 km radius</span>
+          </div>
+
+          <div class="map-grid"></div>
+
+          <div class="map-ring ring-large"></div>
+          <div class="map-ring ring-medium"></div>
+          <div class="map-ring ring-small"></div>
+
+          <div class="map-user">
+            <span></span>
+          </div>
+
+
+          <button
+            class="map-marker marker-one"
+            (click)="selectBusiness('Amma’s Kitchen')"
+          >
+            🍛
+          </button>
+
+          <button
+            class="map-marker marker-two"
+            (click)="selectBusiness('Green Basket')"
+          >
+            🛒
+          </button>
+
+          <button
+            class="map-marker marker-three"
+            (click)="selectBusiness('Urban Salon')"
+          >
+            ✂
+          </button>
+
+          <button
+            class="map-marker marker-four"
+            (click)="selectBusiness('Daily Needs')"
+          >
+            🏪
+          </button>
+
+
+          <div class="map-label">
+            You are here
+          </div>
+
+        </div>
+
+
+        <!-- LIST -->
+
+        <div class="nearby-list">
+
+          <article
+            class="nearby-business"
+            *ngFor="let business of businesses"
+            (click)="openBusiness(business)"
+          >
+
+            <div class="nearby-business-image">
+
+              <img
+                [src]="business.image"
+                [alt]="business.name"
+              />
+
+            </div>
+
+            <div class="nearby-business-info">
+
+              <div class="nearby-name">
+
+                <h3>{{ business.name }}</h3>
+
+                <span class="verified">✓</span>
+
+              </div>
+
+              <p>{{ business.category }}</p>
+
+              <div class="nearby-meta">
+
+                <span>★ {{ business.rating }}</span>
+
+                <span>•</span>
+
+                <span>{{ business.distance }} km</span>
+
+              </div>
+
+            </div>
+
+            <span class="nearby-arrow">
+              ↗
+            </span>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= BUSINESS CTA ================= -->
+
+    <section class="owner-section">
+
+      <div class="owner-decoration"></div>
+
+      <div class="owner-content">
+
+        <span class="section-label">
+          FOR LOCAL BUSINESS OWNERS
+        </span>
+
+        <h2>
+          Your work deserves
+          to be <em>seen.</em>
+        </h2>
+
+        <p>
+          Put your business in front of people
+          looking for something local.
+        </p>
+
+        <button routerLink="/business-dashboard">
+          List your business
+          <span>↗</span>
+        </button>
+
+      </div>
+
+
+      <div class="owner-images">
+
+        <img
+          src="/images/Piece Begins.jpg"
+          alt="Local business"
+          class="owner-image-one"
+        />
+
+        <img
+          src="/images/Business from Home.jpg"
+          alt="Local creator"
+          class="owner-image-two"
+        />
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="footer">
+
+    <div class="footer-brand">
+
+      <span class="brand-icon">N</span>
+
+      <div>
+        <strong>NearNest</strong>
+        <small>Discover what's close.</small>
+      </div>
 
     </div>
 
-
-    <div class="business-grid">
-
-      <article class="business-card">
-
-        <div class="business-image"></div>
-
-        <div class="business-info">
-
-          <span class="business-category">
-            Restaurant
-          </span>
-
-          <h3>Local Kitchen</h3>
-
-          <p>
-            Fresh food and local favourites.
-          </p>
-
-          <div class="business-meta">
-            Nearby · Open now
-          </div>
-
-        </div>
-
-      </article>
-
-
-      <article class="business-card">
-
-        <div class="business-image"></div>
-
-        <div class="business-info">
-
-          <span class="business-category">
-            Grocery
-          </span>
-
-          <h3>Neighbourhood Mart</h3>
-
-          <p>
-            Everyday products close to you.
-          </p>
-
-          <div class="business-meta">
-            Nearby · Open now
-          </div>
-
-        </div>
-
-      </article>
-
-
-      <article class="business-card">
-
-        <div class="business-image"></div>
-
-        <div class="business-info">
-
-          <span class="business-category">
-            Services
-          </span>
-
-          <h3>Local Services</h3>
-
-          <p>
-            Trusted services in your area.
-          </p>
-
-          <div class="business-meta">
-            Nearby · Open now
-          </div>
-
-        </div>
-
-      </article>
-
+    <div class="footer-center">
+      Made for local. Built for community.
     </div>
 
-  </section>
+    <span class="footer-copy">
+      © 2026 NearNest
+    </span>
+
+  </footer>
 
 </div>

@@ -1,809 +1,845 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap');
+/* =========================================================
+   NEARNEST LOGIN
+   FOREST GREEN + WARM CREAM THEME
+   ========================================================= */
 
-
-:root {
-    --forest: #1f4e36;
-    --forest-dark: #163b29;
-    --green: #2d7047;
-    --sage: #e5f1e5;
-    --cream: #fbf8f0;
-    --ink: #17221c;
-    --muted: #718078;
-    --border: #dfe5df;
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100%;
 }
-
-
-/* ================================
-   RESET
-================================ */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
 }
 
 
-/* ================================
+/* =========================================================
    PAGE
-================================ */
+   ========================================================= */
 
 .login-page {
+  width: 100%;
+  min-height: 100svh;
 
-    min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  padding: 40px 24px;
 
-    padding: 28px;
+  background: #F7F1E5;
 
-    background:
-        radial-gradient(
-            circle at 10% 20%,
-            rgba(45,112,71,.08),
-            transparent 30%
-        ),
-        #f1eee7;
-
-    font-family: 'DM Sans', sans-serif;
-
+  overflow: auto;
 }
 
 
-/* ================================
-   MAIN CARD
-================================ */
+/* =========================================================
+   MAIN SHELL
+   ========================================================= */
 
-.login-card {
+.login-shell {
+  position: relative;
 
-    width: min(1040px, 100%);
+  width: min(1080px, 100%);
+  min-height: 650px;
 
-    min-height: 610px;
+  display: grid;
 
-    display: grid;
+  grid-template-columns: 48% 52%;
 
-    grid-template-columns: 44% 56%;
+  overflow: hidden;
 
-    overflow: hidden;
+  border-radius: 28px;
 
-    border-radius: 26px;
+  background: #FFFDF8;
 
-    background: #fff;
-
-    box-shadow:
-        0 30px 80px rgba(24, 50, 37, .14),
-        0 2px 8px rgba(24, 50, 37, .05);
-
+  box-shadow:
+    0 25px 70px rgba(6, 43, 28, .12),
+    0 5px 20px rgba(6, 43, 28, .05);
 }
 
 
-/* ================================
-   LEFT VISUAL
-================================ */
+/* =========================================================
+   FORM PANEL
+   ========================================================= */
 
-.login-visual {
+.form-panel {
+  order: 1;
 
-    position: relative;
+  position: relative;
 
-    min-height: 610px;
+  display: flex;
+  align-items: center;
 
-    overflow: hidden;
+  padding: 55px 50px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #dcebdc,
-            #bdd8c0
-        );
+  background: #FFFDF8;
 
+  overflow: hidden;
+}
+
+/* =========================================================
+   FORM CONTENT
+   ========================================================= */
+
+.form-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(500px, 100%);
+
+  margin: auto;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.small-label {
+  color: #C9684B;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  letter-spacing: 3px;
+}
+
+.form-top h1 {
+  margin: 12px 0 10px;
+
+  color: #2E2630;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 54px;
+
+  line-height: .95;
+
+  letter-spacing: -3px;
+
+  font-weight: 500;
+}
+
+.form-top h1 em {
+  color: #C9684B;
+  font-style: italic;
+}
+
+.form-top p {
+  margin: 0;
+
+  color: #687970;
+
+  font-size: 14px;
+
+  line-height: 1.6;
 }
 
 
-/* Decorative circles */
-
-.login-visual::before {
-
-    content: '';
-
-    position: absolute;
-
-    width: 380px;
-    height: 380px;
-
-    border-radius: 50%;
-
-    background: rgba(255,255,255,.28);
-
-    top: -150px;
-    left: -150px;
-
-}
-
-
-.login-visual::after {
-
-    content: '';
-
-    position: absolute;
-
-    width: 300px;
-    height: 300px;
-
-    border-radius: 50%;
-
-    background: rgba(31,78,54,.07);
-
-    right: -120px;
-    bottom: -100px;
-
-}
-
-
-/* Content */
-
-.visual-content {
-
-    position: relative;
-
-    z-index: 2;
-
-    height: 100%;
-
-    padding: 38px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: space-between;
-
-}
-
-
-/* ================================
-   BRAND
-================================ */
-
-.brand {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    color: var(--forest);
-
-    font-size: 20px;
-
-    font-weight: 700;
-
-}
-
-
-.brand-mark {
-
-    width: 27px;
-    height: 27px;
-
-    display: block;
-
-    border-radius: 50%;
-
-    background: var(--forest);
-
-    position: relative;
-
-}
-
-
-.brand-mark::after {
-
-    content: '';
-
-    position: absolute;
-
-    width: 9px;
-    height: 14px;
-
-    border-left: 2px solid white;
-    border-bottom: 2px solid white;
-
-    transform: rotate(-45deg);
-
-    left: 8px;
-    top: 5px;
-
-}
-
-
-/* ================================
-   VISUAL COPY
-================================ */
-
-.visual-copy {
-
-    max-width: 340px;
-
-    margin-bottom: 35px;
-
-}
-
-
-.eyebrow {
-
-    display: block;
-
-    margin-bottom: 12px;
-
-    color: var(--green);
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.6px;
-
-}
-
-
-.visual-copy h2 {
-
-    font-family: 'Playfair Display', serif;
-
-    font-size: clamp(32px, 4vw, 48px);
-
-    line-height: 1.08;
-
-    font-weight: 500;
-
-    color: var(--ink);
-
-    margin-bottom: 18px;
-
-}
-
-
-.visual-copy h2 em {
-
-    color: var(--forest);
-
-    font-style: normal;
-
-}
-
-
-.visual-copy p {
-
-    color: #53665a;
-
-    font-size: 14px;
-
-    line-height: 1.7;
-
-}
-
-
-/* ================================
-   RIGHT FORM
-================================ */
-
-.login-form-section {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 50px 70px;
-
-    background: #fff;
-
-}
-
-
-.login-form-container {
-
-    width: 100%;
-
-    max-width: 430px;
-
-}
-
-
-/* Mobile brand hidden */
-
-.mobile-brand {
-
-    display: none;
-
-}
-
-
-/* ================================
-   HEADING
-================================ */
-
-.heading {
-
-    margin-bottom: 32px;
-
-}
-
-
-.heading .eyebrow {
-
-    margin-bottom: 9px;
-
-}
-
-
-.heading h1 {
-
-    color: var(--ink);
-
-    font-size: 30px;
-
-    line-height: 1.2;
-
-    font-weight: 700;
-
-    letter-spacing: -.6px;
-
-    margin-bottom: 9px;
-
-}
-
-
-.heading p {
-
-    color: var(--muted);
-
-    font-size: 14px;
-
-    line-height: 1.5;
-
-}
-
-
-/* ================================
+/* =========================================================
    FORM
-================================ */
+   ========================================================= */
 
-.form-group {
-
-    margin-bottom: 20px;
-
+form {
+  margin-top: 35px;
 }
 
-
-.form-group label {
-
-    display: block;
-
-    margin-bottom: 7px;
-
-    color: #334239;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
+.field {
+  margin-bottom: 22px;
 }
 
+.field label,
+.label-row label {
+  color: #2E2630;
 
-/* Label row */
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 9px;
+}
 
 .label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    margin-bottom: 7px;
-
+  margin-bottom: 9px;
 }
 
 
-.label-row label {
+/* =========================================================
+   INPUT
+   ========================================================= */
 
-    margin-bottom: 0;
+.input-wrap {
+  position: relative;
 
+  display: flex;
+  align-items: center;
+}
+
+.input-number {
+  position: absolute;
+
+  left: 18px;
+
+  z-index: 2;
+
+  color: #829188;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.input-wrap input {
+  width: 100%;
+  height: 58px;
+
+  padding: 0 18px 0 48px;
+
+  border: 1px solid #DED5C8;
+
+  border-radius: 14px;
+
+  outline: none;
+
+  background: #F8F4EB;
+
+  color: #2E2630;
+
+  font-size: 15px;
+}
+
+.input-wrap input::placeholder {
+  color: #A59BA2;
+}
+
+.input-wrap input:focus {
+  border-color: #062B1C;
+
+  background: #FFFFFF;
+
+  box-shadow:
+    0 0 0 4px rgba(6, 43, 28, .07);
 }
 
 
-.forgot-link {
-
-    color: var(--green);
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    text-decoration: none;
-
-}
-
-
-.forgot-link:hover {
-
-    text-decoration: underline;
-
-}
-
-
-/* Inputs */
-
-.form-group input[type="email"],
-.form-group input[type="password"],
-.password-wrapper input {
-
-    width: 100%;
-
-    height: 48px;
-
-    padding: 0 15px;
-
-    border: 1px solid var(--border);
-
-    border-radius: 11px;
-
-    background: #fbfcfb;
-
-    color: var(--ink);
-
-    font-family: 'DM Sans', sans-serif;
-
-    font-size: 14px;
-
-    transition: .2s ease;
-
-}
-
-
-.form-group input::placeholder {
-
-    color: #a2ada5;
-
-}
-
-
-.form-group input:focus {
-
-    outline: none;
-
-    border-color: var(--forest);
-
-    background: #fff;
-
-    box-shadow:
-        0 0 0 4px rgba(31,78,54,.09);
-
-}
-
-
-/* ================================
+/* =========================================================
    PASSWORD
-================================ */
+   ========================================================= */
 
-.password-wrapper {
+.password-input input {
+  padding-right: 75px;
+}
 
-    position: relative;
+.forgot {
+  padding: 0;
 
+  border: none;
+
+  background: transparent;
+
+  color: #062B1C;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.forgot:hover {
+  color: #C9684B;
+}
+
+.show-password {
+  position: absolute;
+
+  right: 18px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  border: none;
+
+  background: transparent;
+
+  color: #062B1C;
+
+  font-size: 12px;
+  font-weight: 800;
 }
 
 
-.password-wrapper input {
-
-    padding-right: 70px;
-
-}
-
-
-.password-toggle {
-
-    position: absolute;
-
-    right: 13px;
-
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    border: none;
-
-    background: none;
-
-    color: var(--green);
-
-    font-family: 'DM Sans', sans-serif;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-}
-
-
-/* ================================
+/* =========================================================
    REMEMBER
-================================ */
+   ========================================================= */
 
-.login-options {
-
-    margin: 3px 0 23px;
-
+.remember-row {
+  margin: 5px 0 24px;
 }
-
 
 .remember {
+  display: flex;
+  align-items: center;
+  gap: 9px;
 
-    display: flex;
+  color: #687970;
 
-    align-items: center;
+  font-size: 13px;
 
-    gap: 8px;
-
-    color: var(--muted);
-
-    font-size: 12px;
-
-    cursor: pointer;
-
+  cursor: pointer;
 }
-
 
 .remember input {
+  width: 17px;
+  height: 17px;
 
-    width: 15px;
-    height: 15px;
-
-    accent-color: var(--forest);
-
+  accent-color: #062B1C;
 }
 
 
-/* ================================
+/* =========================================================
    LOGIN BUTTON
-================================ */
+   ========================================================= */
 
-.btn-login {
-    width: 100%;
-    height: 52px;
+.login-button {
+  width: 100%;
+  height: 58px;
 
-    border: none;
-    border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    background: #1f5a3f;
-    color: #ffffff;
+  gap: 12px;
 
-    font-family: 'Sora', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
+  border: none;
+  border-radius: 14px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+  background: #062B1C;
 
-    cursor: pointer;
+  color: white;
 
-    box-shadow: 0 8px 20px rgba(31, 90, 63, 0.18);
+  font-size: 15px;
+  font-weight: 800;
 
-    transition: background 0.25s ease,
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
+  box-shadow:
+    0 14px 28px rgba(6, 43, 28, .18);
+
+  transition: .2s ease;
 }
 
-.btn-login span {
-    color: #ffffff;
+.login-button:hover {
+  background: #0A402A;
+  transform: translateY(-2px);
 }
 
-.btn-arrow {
-    font-size: 20px;
-    line-height: 1;
-    transition: transform 0.25s ease;
+.login-button .arrow {
+  font-size: 20px;
+
+  transition: transform .2s ease;
 }
 
-.btn-login:hover {
-    background: #174831;
-    transform: translateY(-1px);
-    box-shadow: 0 10px 24px rgba(31, 90, 63, 0.25);
+.login-button:hover .arrow {
+  transform: translate(4px, -4px);
 }
 
-.btn-login:hover .btn-arrow {
-    transform: translateX(4px);
-}
 
-.btn-login:active {
-    transform: translateY(0);
-}
-
-/* ================================
-   REGISTER LINK
-================================ */
+/* =========================================================
+   REGISTER
+   ========================================================= */
 
 .register-link {
+  margin-top: 22px;
 
-    margin-top: 25px;
+  text-align: center;
 
-    display: flex;
+  color: #78847D;
 
-    justify-content: center;
-
-    gap: 5px;
-
-    color: var(--muted);
-
-    font-size: 13px;
-
+  font-size: 13px;
 }
-
 
 .register-link a {
+  margin-left: 5px;
 
-    color: var(--forest);
+  color: #062B1C;
 
-    font-weight: 700;
+  font-weight: 900;
 
-    text-decoration: none;
-
+  text-decoration: none;
 }
-
 
 .register-link a:hover {
+  color: #C9684B;
+}
 
-    text-decoration: underline;
+
+/* =========================================================
+   FORM FOOTER
+   ========================================================= */
+
+.form-footer {
+  margin-top: 35px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  color: #9A938C;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: 3px;
+}
+
+.footer-line {
+  flex: 1;
+
+  height: 1px;
+
+  background: #E5DDD2;
+}
+
+
+/* =========================================================
+   VISUAL PANEL
+   ========================================================= */
+
+.visual-panel {
+  order: 2;
+
+  position: relative;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(217, 164, 65, .16),
+      transparent 28%
+    ),
+    #062B1C;
+}
+
+/* =========================================================
+   DECORATIVE SHAPES
+   ========================================================= */
+
+.shape {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.shape-one {
+  width: 430px;
+  height: 430px;
+
+  top: -230px;
+  right: -130px;
+
+  background: rgba(59, 31, 58, .55);
+}
+
+.shape-two {
+  width: 300px;
+  height: 300px;
+
+  right: -120px;
+  bottom: -140px;
+
+  background: rgba(217, 164, 65, .14);
+}
+
+.shape-three {
+  width: 120px;
+  height: 120px;
+
+  left: -50px;
+  bottom: 25%;
+
+  background: rgba(201, 104, 75, .22);
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.brand {
+  position: absolute;
+
+  top: 25px;
+  left: 28px;
+
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: #FFFDF8;
+
+  font-family: Georgia, serif;
+
+  font-size: 21px;
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #3B1F3A;
+
+  color: #FFFDF8;
+
+  font-family: Georgia, serif;
+
+  font-size: 19px;
+}
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.hero-image {
+  position: absolute;
+
+  z-index: 5;
+
+  top: 100px;
+  left: 11%;
+
+  width: 78%;
+  height: 330px;
+
+  overflow: hidden;
+
+  border-radius: 150px 150px 24px 24px;
+
+  background: #DCE5D7;
+
+  transform: rotate(2deg);
+
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, .20);
+}
+
+.hero-image video {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: inherit;
+}
+
+.visual-panel:hover .hero-image img {
+  transform: scale(1.04);
+}
+
+
+/* =========================================================
+   IMAGE TAG
+   ========================================================= */
+
+.image-tag {
+  position: absolute;
+
+  z-index: 15;
+
+  top: 24%;
+  right: 28px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 12px 16px;
+
+  border-radius: 30px;
+
+  background: #FFFDF8;
+
+  color: #062B1C;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 2px;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.16);
+}
+
+.tag-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #C9684B;
+}
+
+
+/* =========================================================
+   EDITORIAL COPY
+   ========================================================= */
+
+.visual-copy {
+  position: absolute;
+
+  z-index: 15;
+
+  left: 32px;
+  bottom: 28px;
+
+  width: 82%;
+
+  color: white;
+}
+
+.eyebrow {
+  margin-bottom: 9px;
+
+  color: #D9A441;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: 2.5px;
+}
+
+.visual-copy h2 {
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: 39px;
+
+  line-height: .95;
+
+  letter-spacing: -2px;
+
+  font-weight: 500;
+}
+
+.visual-copy h2 em {
+  color: #C9684B;
+  font-style: italic;
+}
+
+.visual-copy p {
+  max-width: 350px;
+
+  margin: 12px 0 0;
+
+  color: rgba(255,255,255,.78);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+/* =========================================================
+   FLOATING CARD
+   ========================================================= */
+
+.floating-card {
+  position: absolute;
+
+  z-index: 25;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 10px 13px;
+
+  min-width: 155px;
+
+  border: 1px solid rgba(255,255,255,.8);
+
+  border-radius: 14px;
+
+  background: rgba(255,253,248,.96);
+
+  box-shadow:
+    0 15px 30px rgba(0,0,0,.16);
+}
+
+
+.card-one {
+  top: 180px;
+  right: 18px;
+}
+
+.card-two {
+  right: 18px;
+  bottom: 150px;
+}
+
+.card-icon,
+.pin {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: white;
+}
+
+.card-icon {
+  background: #D9A441;
+}
+
+.pin {
+  background: #3B1F3A;
+}
+
+.floating-card strong {
+  display: block;
+
+  color: #062B1C;
+
+  font-size: 11px;
+}
+
+
+.floating-card small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #78847D;
+
+  font-size: 9px;
+}
+
+/* =========================================================
+   COUNTER
+   ========================================================= */
+
+.image-number {
+  position: absolute;
+
+  right: 28px;
+  bottom: 25px;
+
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: rgba(255,255,255,.85);
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 3px;
+}
+
+.image-number i {
+  width: 28px;
+  height: 1px;
+
+  background: rgba(255,255,255,.65);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .login-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .form-panel {
+    min-height: 650px;
+  }
+
+  .visual-panel {
+    min-height: 600px;
+  }
 
 }
 
 
-/* ================================
-   TABLET
-================================ */
+@media (max-width: 550px) {
 
-@media (max-width: 850px) {
+  .login-page {
+    padding: 0;
+  }
 
-    .login-card {
+  .login-shell {
+    min-height: 100svh;
 
-        grid-template-columns: 1fr;
+    border-radius: 0;
+  }
 
-        max-width: 520px;
+  .form-panel {
+    padding: 45px 25px;
+  }
 
-    }
+  .form-top h1 {
+    font-size: 46px;
+  }
 
+  .visual-panel {
+    min-height: 500px;
+  }
 
-    .login-visual {
+  .visual-copy {
+    left: 24px;
+    bottom: 28px;
+  }
 
-        min-height: 220px;
+  .visual-copy h2 {
+    font-size: 38px;
+  }
 
-    }
-
-
-    .visual-content {
-
-        padding: 28px;
-
-    }
-
-
-    .visual-copy {
-
-        margin: 0;
-
-        max-width: 420px;
-
-    }
-
-
-    .visual-copy h2 {
-
-        font-size: 34px;
-
-        margin-bottom: 10px;
-
-    }
-
-
-    .visual-copy p {
-
-        display: none;
-
-    }
-
-
-    .login-form-section {
-
-        padding: 38px;
-
-    }
-
-}
-
-
-/* ================================
-   MOBILE
-================================ */
-
-@media (max-width: 520px) {
-
-    .login-page {
-
-        padding: 12px;
-
-        align-items: flex-start;
-
-    }
-
-
-    .login-card {
-
-        margin-top: 10px;
-
-        border-radius: 20px;
-
-    }
-
-
-    .login-visual {
-
-        display: none;
-
-    }
-
-
-    .login-form-section {
-
-        padding: 35px 24px;
-
-    }
-
-
-    .mobile-brand {
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 9px;
-
-        margin-bottom: 30px;
-
-        color: var(--forest);
-
-        font-size: 19px;
-
-        font-weight: 700;
-
-    }
-
-
-    .heading h1 {
-
-        font-size: 27px;
-
-    }
-
-
-    .heading {
-
-        margin-bottom: 27px;
-
-    }
-
-
-    .register-link {
-
-        flex-direction: column;
-
-        align-items: center;
-
-    }
+  .floating-card {
+    display: none;
+  }
 
 }

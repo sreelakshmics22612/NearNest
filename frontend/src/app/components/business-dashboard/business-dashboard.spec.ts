@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BusinessDashboard } from './business-dashboard';
 
 describe('BusinessDashboard', () => {
@@ -8,12 +7,12 @@ describe('BusinessDashboard', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BusinessDashboard],
+      imports: [BusinessDashboard]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BusinessDashboard);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {

@@ -1,14 +1,15 @@
 package com.nearnest.controller;
 
-import org.springframework.web.bind.annotation.*;
-
 import com.nearnest.dto.LoginRequest;
+import com.nearnest.dto.LoginResponse;
 import com.nearnest.dto.RegisterRequest;
 import com.nearnest.service.AuthService;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
 
     private final AuthService authService;
@@ -18,12 +19,26 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request) {
-        return authService.register(request);
+    public ResponseEntity<String> register(
+            @RequestBody RegisterRequest request) {
+
+        return ResponseEntity.ok(
+                authService.register(request)
+        );
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request) {
-        return authService.login(request);
+    public ResponseEntity<?> login(
+            @RequestBody LoginRequest request) {
+
+        LoginResponse response = authService.login(request);
+
+        if (response == null) {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Invalid email or password");
+        }
+
+        return ResponseEntity.ok(response);
     }
 }

@@ -1,1 +1,1792 @@
-<p>business-dashboard works!</p>
+<div class="business-page">
+
+  <!-- =====================================================
+       BUSINESS SETUP
+       ===================================================== -->
+
+  <ng-container *ngIf="isSetupMode; else dashboard">
+
+    <div class="setup-page">
+
+      <!-- =================================================
+           LEFT VISUAL PANEL
+           ================================================= -->
+
+      <section class="visual-panel">
+
+        <!-- Decorative background -->
+        <div class="visual-shape visual-shape-one"></div>
+        <div class="visual-shape visual-shape-two"></div>
+
+        <!-- Brand -->
+        <div class="visual-brand">
+
+          <span class="brand-mark">N</span>
+
+          <span class="brand-name">
+            NearNest
+          </span>
+
+        </div>
+
+
+        <!-- =================================================
+             IMAGE GALLERY
+             ================================================= -->
+
+        <div class="visual-gallery">
+
+          <div class="gallery-image">
+
+            <img
+              [src]="visualImages[currentImageIndex].src"
+              [alt]="visualImages[currentImageIndex].title"
+            />
+
+            <div class="gallery-overlay"></div>
+
+          </div>
+
+
+          <!-- Image information -->
+
+          <div class="gallery-info">
+
+            <span>
+              NEARBY STORIES
+            </span>
+
+            <h3>
+              {{ visualImages[currentImageIndex].title }}
+            </h3>
+
+          </div>
+
+
+          <!-- Image counter -->
+
+          <div class="gallery-counter">
+
+            <strong>
+              {{ currentImageIndex + 1 | number:'2.0' }}
+            </strong>
+
+            <span>/ 04</span>
+
+          </div>
+
+
+          <!-- Image dots -->
+
+          <div class="gallery-dots">
+
+            <button
+              *ngFor="
+                let image of visualImages;
+                let i = index
+              "
+              type="button"
+              [class.active]="i === currentImageIndex"
+              (click)="currentImageIndex = i"
+              [attr.aria-label]="'Show image ' + (i + 1)"
+            ></button>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             LEFT CONTENT
+             ================================================= -->
+
+        <div class="visual-content">
+
+          <span class="eyebrow">
+            FOR LOCAL BUSINESS OWNERS
+          </span>
+
+          <h1>
+            Put your
+            <em>business</em>
+            on the map.
+          </h1>
+
+          <p>
+            Tell your neighbourhood who you are,
+            what you make, and where they can find you.
+          </p>
+
+
+          <!-- Small benefits -->
+
+          <div class="visual-points">
+
+            <div class="visual-point">
+
+              <span>01</span>
+
+              <p>
+                Build your local profile
+              </p>
+
+            </div>
+
+
+            <div class="visual-point">
+
+              <span>02</span>
+
+              <p>
+                Showcase your work
+              </p>
+
+            </div>
+
+
+            <div class="visual-point">
+
+              <span>03</span>
+
+              <p>
+                Connect with nearby customers
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Footer -->
+
+        <div class="visual-footer">
+
+          <span>LOCAL</span>
+          <span>TRUSTED</span>
+          <span>NEARBY</span>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           RIGHT FORM PANEL
+           ================================================= -->
+
+      <section class="setup-form">
+
+        <div class="form-inner">
+
+
+          <!-- =================================================
+               FORM HEADER
+               ================================================= -->
+
+          <div class="form-top">
+
+            <div class="step-label">
+
+              <span>
+                BUSINESS PROFILE
+              </span>
+
+              <span>
+                01 / 01
+              </span>
+
+            </div>
+
+
+            <h2>
+              Tell us about
+              <em>your business.</em>
+            </h2>
+
+            <p>
+              These details help customers discover
+              and trust your business.
+            </p>
+
+          </div>
+
+
+          <!-- =================================================
+               SECTION 01 — BUSINESS DETAILS
+               ================================================= -->
+
+          <section class="form-section">
+
+            <div class="section-heading">
+
+              <span class="section-number">
+                01
+              </span>
+
+              <div>
+
+                <h3>
+                  Business details
+                </h3>
+
+                <p>
+                  The basics customers should know.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <!-- Business name -->
+
+            <div class="field">
+
+              <label for="businessName">
+
+                Business name
+
+                <span>*</span>
+
+              </label>
+
+              <input
+                id="businessName"
+                type="text"
+                [(ngModel)]="businessName"
+                placeholder="e.g. Amma's Kitchen"
+              />
+
+            </div>
+
+
+            <!-- Category + Contact -->
+
+            <div class="two-columns">
+
+
+              <!-- Category -->
+
+              <div class="field">
+
+                <label for="category">
+
+                  Category
+
+                  <span>*</span>
+
+                </label>
+
+                <select
+                  id="category"
+                  [(ngModel)]="category"
+                >
+
+                  <option value="">
+                    Select category
+                  </option>
+
+                  <option
+                    *ngFor="let item of categories"
+                    [value]="item"
+                  >
+                    {{ item }}
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <!-- Contact -->
+
+              <div class="field">
+
+                <label for="contactNumber">
+
+                  Contact number
+
+                  <span>*</span>
+
+                </label>
+
+                <input
+                  id="contactNumber"
+                  type="tel"
+                  [(ngModel)]="contactNumber"
+                  placeholder="+91 98765 43210"
+                />
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =================================================
+               SECTION 02 — LOCATION
+               ================================================= -->
+
+          <section class="form-section">
+
+            <div class="section-heading">
+
+              <span class="section-number">
+                02
+              </span>
+
+              <div>
+
+                <h3>
+                  Where are you located?
+                </h3>
+
+                <p>
+                  Help nearby customers find you.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="location-box">
+
+              <div class="location-icon">
+                ◎
+              </div>
+
+
+              <div class="location-main">
+
+                <label for="location">
+                  Business location
+                </label>
+
+                <input
+                  id="location"
+                  type="text"
+                  [(ngModel)]="location"
+                  placeholder="Enter your business location"
+                />
+
+              </div>
+
+
+              <button
+                type="button"
+                class="location-button"
+                (click)="useCurrentLocation()"
+              >
+
+                <span>
+                  ◎
+                </span>
+
+                Use my location
+
+              </button>
+
+            </div>
+
+
+            <!-- Coordinates -->
+
+            <div
+              class="coordinates"
+              *ngIf="
+                latitude !== null &&
+                longitude !== null
+              "
+            >
+
+              <span>
+                ✓ Location captured
+              </span>
+
+              <small>
+                {{ latitude.toFixed(5) }},
+                {{ longitude.toFixed(5) }}
+              </small>
+
+            </div>
+
+          </section>
+
+
+          <!-- =================================================
+               SECTION 03 — VERIFICATION
+               ================================================= -->
+
+          <section class="form-section">
+
+            <div class="section-heading">
+
+              <span class="section-number">
+                03
+              </span>
+
+              <div>
+
+                <h3>
+                  Make it recognizable
+                </h3>
+
+                <p>
+                  Add your logo and verification document.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="upload-grid">
+
+
+              <!-- =================================================
+                   BUSINESS LOGO
+                   ================================================= -->
+
+              <div class="upload-card">
+
+                <div class="upload-card-top">
+
+                  <div>
+
+                    <span class="upload-label">
+                      BUSINESS LOGO
+                    </span>
+
+                    <h4>
+                      Your identity
+                    </h4>
+
+                  </div>
+
+                  <span class="required">
+                    REQUIRED
+                  </span>
+
+                </div>
+
+
+                <!-- Upload -->
+
+                <label
+                  class="logo-upload"
+                  *ngIf="!logoPreview"
+                >
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    (change)="onLogoSelected($event)"
+                    hidden
+                  />
+
+                  <span class="upload-plus">
+                    +
+                  </span>
+
+                  <strong>
+                    Upload logo
+                  </strong>
+
+                  <small>
+                    PNG or JPG
+                  </small>
+
+                </label>
+
+
+                <!-- Preview -->
+
+                <div
+                  class="logo-preview"
+                  *ngIf="logoPreview"
+                >
+
+                  <img
+                    [src]="logoPreview"
+                    alt="Business logo preview"
+                  />
+
+                  <button
+                    type="button"
+                    (click)="removeLogo()"
+                    aria-label="Remove logo"
+                  >
+                    ×
+                  </button>
+
+                </div>
+
+              </div>
+
+
+              <!-- =================================================
+                   IDENTITY DOCUMENT
+                   ================================================= -->
+
+              <div class="upload-card">
+
+                <div class="upload-card-top">
+
+                  <div>
+
+                    <span class="upload-label">
+                      VERIFICATION
+                    </span>
+
+                    <h4>
+                      Identity document
+                    </h4>
+
+                  </div>
+
+                  <span class="required private">
+                    PRIVATE
+                  </span>
+
+                </div>
+
+
+                <!-- Upload -->
+
+                <label
+                  class="document-upload"
+                  *ngIf="!identityFile"
+                >
+
+                  <input
+                    type="file"
+                    accept=".jpg,.jpeg,.png,.pdf"
+                    (change)="onIdentitySelected($event)"
+                    hidden
+                  />
+
+                  <span class="document-icon">
+                    □
+                  </span>
+
+                  <strong>
+                    Upload document
+                  </strong>
+
+                  <small>
+                    JPG, PNG or PDF
+                  </small>
+
+                </label>
+
+
+                <!-- Selected document -->
+
+                <div
+                  class="document-selected"
+                  *ngIf="identityFile"
+                >
+
+                  <span class="document-check">
+                    ✓
+                  </span>
+
+                  <div>
+
+                    <strong>
+                      {{ identityFile.name }}
+                    </strong>
+
+                    <small>
+                      Document selected
+                    </small>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =================================================
+               SECTION 04 — WORK PHOTOS
+               ================================================= -->
+
+          <section class="form-section">
+
+            <div class="section-heading">
+
+              <span class="section-number">
+                04
+              </span>
+
+              <div>
+
+                <h3>
+                  Show your work
+                </h3>
+
+                <p>
+                  Add a few photos customers can explore.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="work-upload">
+
+
+              <!-- Existing photos -->
+
+              <div
+                class="photo-grid"
+                *ngIf="workPhotoPreviews.length > 0"
+              >
+
+                <div
+                  class="work-photo"
+                  *ngFor="
+                    let photo of workPhotoPreviews;
+                    let i = index
+                  "
+                >
+
+                  <img
+                    [src]="photo"
+                    alt="Business work photo"
+                  />
+
+                  <button
+                    type="button"
+                    (click)="removeWorkPhoto(i)"
+                    aria-label="Remove photo"
+                  >
+                    ×
+                  </button>
+
+                </div>
+
+              </div>
+
+
+              <!-- Add photos -->
+
+              <label
+                class="add-photo"
+                *ngIf="workPhotoPreviews.length < 6"
+              >
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  (change)="onWorkPhotosSelected($event)"
+                  hidden
+                />
+
+                <span>
+                  +
+                </span>
+
+                <strong>
+                  Add photos
+                </strong>
+
+                <small>
+                  {{ workPhotoPreviews.length }} / 6
+                </small>
+
+              </label>
+
+            </div>
+
+          </section>
+
+
+          <!-- =================================================
+               PRIVACY NOTE
+               ================================================= -->
+
+          <div class="privacy-note">
+
+            <span>
+              ✓
+            </span>
+
+            <p>
+              Your identity document is used only for
+              verification and will not appear publicly.
+            </p>
+
+          </div>
+
+
+          <!-- =================================================
+               CREATE BUSINESS
+               ================================================= -->
+
+          <button
+            type="button"
+            class="save-button"
+            [disabled]="isSaving || !isFormValid()"
+            (click)="saveBusiness()"
+          >
+
+            <span>
+              {{
+                isSaving
+                  ? 'Creating your business...'
+                  : 'Create my business'
+              }}
+            </span>
+
+            <span class="button-arrow">
+              ↗
+            </span>
+
+          </button>
+
+
+          <p class="required-note">
+            Fields marked * are required.
+          </p>
+
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </ng-container>
+
+
+  <!-- =====================================================
+       BUSINESS DASHBOARD AFTER SETUP
+       ===================================================== -->
+
+  <ng-template #dashboard>
+
+    <div class="dashboard-shell">
+
+
+      <!-- =================================================
+           HEADER
+           ================================================= -->
+
+      <header class="dashboard-header">
+
+        <div class="dashboard-brand">
+
+          <span class="brand-mark">
+            N
+          </span>
+
+          <span>
+            NearNest
+          </span>
+
+        </div>
+
+
+        <div class="dashboard-actions">
+
+          <span class="business-status">
+
+            <i></i>
+
+            Business active
+
+          </span>
+
+
+          <button
+            type="button"
+            class="edit-button"
+            (click)="editProfile()"
+          >
+            Edit profile
+          </button>
+
+
+          <button
+            type="button"
+            class="profile-button"
+          >
+
+            {{
+              businessName.charAt(0).toUpperCase() || 'B'
+            }}
+
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- =================================================
+           DASHBOARD CONTENT
+           ================================================= -->
+
+  <main class="dashboard-main">
+
+  <!-- =====================================================
+       OWNER OVERVIEW
+       ===================================================== -->
+
+  <div class="owner-overview">
+
+    <div class="overview-heading">
+
+      <div>
+        <span class="dashboard-eyebrow">
+          OWNER DASHBOARD
+        </span>
+
+        <h1>
+          Welcome back,
+          <em>{{ businessName }}</em>
+        </h1>
+
+        <p>
+          Manage your business, customer requests and storefront
+          from one place.
+        </p>
+      </div>
+
+      <div class="location-pill">
+        ◎ {{ location }}
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         QUICK NAVIGATION
+         ===================================================== -->
+
+    <div class="owner-navigation">
+
+  <button
+    type="button"
+    class="owner-nav-item"
+    [class.active]="activeSection === 'overview'"
+    (click)="setActiveSection('overview')">
+    <span class="nav-number">01</span>
+    Overview
+  </button>
+
+  <button
+    type="button"
+    class="owner-nav-item"
+    [class.active]="activeSection === 'requests'"
+    (click)="setActiveSection('requests')">
+    <span class="nav-number">02</span>
+    Requests
+  </button>
+
+  <button
+    type="button"
+    class="owner-nav-item"
+    [class.active]="activeSection === 'orders'"
+    (click)="setActiveSection('orders')">
+    <span class="nav-number">03</span>
+    Orders
+  </button>
+
+  <button
+    type="button"
+    class="owner-nav-item"
+    [class.active]="activeSection === 'calendar'"
+    (click)="setActiveSection('calendar')">
+    <span class="nav-number">04</span>
+    Calendar
+  </button>
+
+  <button
+    type="button"
+    class="owner-nav-item"
+    [class.active]="activeSection === 'products'"
+    (click)="setActiveSection('products')">
+    <span class="nav-number">05</span>
+    Products
+  </button>
+
+  <button
+    type="button"
+    class="owner-nav-item"
+    [class.active]="activeSection === 'messages'"
+    (click)="setActiveSection('messages')">
+    <span class="nav-number">06</span>
+    Messages
+  </button>
+
+  <button
+    type="button"
+    class="owner-nav-item"
+    [class.active]="activeSection === 'earnings'"
+    (click)="setActiveSection('earnings')">
+    <span class="nav-number">07</span>
+    Earnings
+  </button>
+
+  <button
+    type="button"
+    class="owner-nav-item"
+    [class.active]="activeSection === 'storefront'"
+    (click)="setActiveSection('storefront')">
+    <span class="nav-number">08</span>
+    Storefront
+  </button>
+
+</div>
+
+<!-- =====================================================
+     AVAILABILITY CALENDAR
+     ===================================================== -->
+
+<section
+  class="availability-section"
+  *ngIf="activeSection === 'calendar'"
+>
+
+  <div class="availability-header">
+
+    <div>
+      <span class="dashboard-eyebrow">
+        BUSINESS AVAILABILITY
+      </span>
+
+      <h2>
+        Keep your calendar <em>up to date.</em>
+      </h2>
+
+      <p>
+        Select a date to control when customers can request your services.
+        Unavailable dates are stored in your business availability records.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="calendar-today-button"
+      (click)="goToToday()"
+    >
+      Today
+    </button>
+
+  </div>
+
+
+  <div class="availability-layout">
+
+    <!-- Calendar -->
+
+    <article class="calendar-card">
+
+      <div class="calendar-toolbar">
+
+        <button
+          type="button"
+          class="calendar-nav-button"
+          (click)="previousMonth()"
+          aria-label="Previous month"
+        >
+          ←
+        </button>
+
+        <div class="calendar-month">
+          <span>
+            {{ calendarDate | date:'MMMM yyyy' }}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          class="calendar-nav-button"
+          (click)="nextMonth()"
+          aria-label="Next month"
+        >
+          →
+        </button>
+
+      </div>
+
+
+      <div
+        class="calendar-loading"
+        *ngIf="calendarLoading"
+      >
+        Loading availability...
+      </div>
+
+
+      <div
+        class="calendar-grid"
+        *ngIf="!calendarLoading"
+      >
+
+        <div class="calendar-weekday">
+          Mon
+        </div>
+
+        <div class="calendar-weekday">
+          Tue
+        </div>
+
+        <div class="calendar-weekday">
+          Wed
+        </div>
+
+        <div class="calendar-weekday">
+          Thu
+        </div>
+
+        <div class="calendar-weekday">
+          Fri
+        </div>
+
+        <div class="calendar-weekday">
+          Sat
+        </div>
+
+        <div class="calendar-weekday">
+          Sun
+        </div>
+
+
+        <button
+          type="button"
+          class="calendar-day"
+          *ngFor="let day of calendarDays"
+          [class.other-month]="!day.isCurrentMonth"
+          [class.today]="day.isToday"
+          [class.unavailable]="day.isUnavailable"
+          [class.selected]="
+            selectedCalendarDate &&
+            isSameDate(day.date, selectedCalendarDate)
+          "
+          (click)="selectCalendarDate(day)"
+        >
+
+          <span class="calendar-day-number">
+            {{ day.dayNumber }}
+          </span>
+
+          <span
+            class="calendar-day-status"
+            *ngIf="day.isUnavailable"
+          >
+            Unavailable
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <div class="calendar-legend">
+
+        <span>
+          <i class="legend-dot available"></i>
+          Available
+        </span>
+
+        <span>
+          <i class="legend-dot unavailable"></i>
+          Unavailable
+        </span>
+
+        <span>
+          <i class="legend-dot today"></i>
+          Today
+        </span>
+
+      </div>
+
+    </article>
+
+
+    <!-- Selected date controls -->
+
+    <aside class="calendar-side-card">
+
+      <span class="summary-label">
+        SELECTED DATE
+      </span>
+
+      <ng-container *ngIf="selectedCalendarDate; else noDateSelected">
+
+        <h3>
+          {{ selectedCalendarDate | date:'EEEE, d MMMM yyyy' }}
+        </h3>
+
+        <div
+          class="calendar-status"
+          [class.is-unavailable]="
+            isDateUnavailable(selectedCalendarDate)
+          "
+        >
+          <span class="status-indicator"></span>
+
+          {{
+            isDateUnavailable(selectedCalendarDate)
+              ? 'Unavailable'
+              : 'Available'
+          }}
+        </div>
+
+
+        <div class="calendar-reason-field">
+
+          <label for="unavailableReason">
+            Reason
+            <span>Optional</span>
+          </label>
+
+          <textarea
+            id="unavailableReason"
+            [(ngModel)]="unavailableReason"
+            rows="4"
+            placeholder="Add a reason for this unavailable date"
+          ></textarea>
+
+        </div>
+
+
+        <div class="calendar-actions">
+
+          <button
+            type="button"
+            class="calendar-primary-action"
+            [disabled]="calendarSaving"
+            (click)="markSelectedDateUnavailable()"
+          >
+            {{
+              calendarSaving
+                ? 'Saving...'
+                : 'Mark unavailable'
+            }}
+          </button>
+
+          <button
+            type="button"
+            class="calendar-secondary-action"
+            [disabled]="
+              calendarSaving ||
+              !isDateUnavailable(selectedCalendarDate)
+            "
+            (click)="makeSelectedDateAvailable()"
+          >
+            Make available
+          </button>
+
+        </div>
+
+      </ng-container>
+
+
+      <ng-template #noDateSelected>
+
+        <div class="calendar-empty-state">
+
+          <span class="empty-state-mark">
+            +
+          </span>
+
+          <h3>
+            Select a date
+          </h3>
+
+          <p>
+            Choose a day from the calendar to view or update
+            its availability.
+          </p>
+
+        </div>
+
+      </ng-template>
+
+
+      <div
+        class="calendar-message"
+        *ngIf="calendarMessage"
+      >
+        {{ calendarMessage }}
+      </div>
+
+    </aside>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     OWNER OVERVIEW
+     ===================================================== -->
+
+<div *ngIf="activeSection === 'overview'">
+    <!-- =====================================================
+         BUSINESS SUMMARY
+         ===================================================== -->
+
+    <section class="owner-summary-grid">
+
+      <!-- Business -->
+
+      <article class="owner-summary-card">
+
+        <span class="summary-number">
+          01
+        </span>
+
+        <div>
+
+          <span class="summary-label">
+            BUSINESS
+          </span>
+
+          <h3>
+            {{ businessName }}
+          </h3>
+
+          <p>
+            {{ category }}
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <!-- Location -->
+
+      <article class="owner-summary-card">
+
+        <span class="summary-number">
+          02
+        </span>
+
+        <div>
+
+          <span class="summary-label">
+            LOCATION
+          </span>
+
+          <h3>
+            Nearby customers
+          </h3>
+
+          <p>
+            {{ location }}
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <!-- Contact -->
+
+      <article class="owner-summary-card">
+
+        <span class="summary-number">
+          03
+        </span>
+
+        <div>
+
+          <span class="summary-label">
+            CONTACT
+          </span>
+
+          <h3>
+            {{ contactNumber }}
+          </h3>
+
+          <p>
+            Business contact
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <!-- Profile -->
+
+      <article class="owner-summary-card">
+
+        <span class="summary-number">
+          04
+        </span>
+
+        <div>
+
+          <span class="summary-label">
+            PROFILE
+          </span>
+
+          <h3>
+            Profile complete
+          </h3>
+
+          <p>
+            Your business information is saved.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         BUSINESS PROFILE
+         ===================================================== -->
+
+    <section class="owner-profile-card">
+
+      <div class="owner-profile-visual">
+
+        <div class="owner-profile-logo">
+
+          <img
+            *ngIf="logoPreview"
+            [src]="logoPreview"
+            alt="Business logo"
+          />
+
+          <span *ngIf="!logoPreview">
+            {{ businessName.charAt(0).toUpperCase() || 'B' }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="owner-profile-content">
+
+        <span class="summary-label">
+          YOUR BUSINESS
+        </span>
+
+        <h2>
+          {{ businessName }}
+        </h2>
+
+        <span class="owner-category">
+          {{ category }}
+        </span>
+
+        <p>
+          Your business profile is currently stored with NearNest.
+          Customers will use these details to discover and understand
+          your business.
+        </p>
+
+        <div class="owner-profile-details">
+
+          <div>
+            <span>CONTACT</span>
+            <strong>{{ contactNumber }}</strong>
+          </div>
+
+          <div>
+            <span>LOCATION</span>
+            <strong>{{ location }}</strong>
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="owner-outline-button"
+          (click)="editProfile()"
+        >
+          Edit business profile →
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         BUSINESS MANAGEMENT
+         ===================================================== -->
+
+    <section class="management-section">
+
+      <div class="section-title">
+
+        <div>
+
+          <span>
+            BUSINESS MANAGEMENT
+          </span>
+
+          <h2>
+            Everything your business needs.
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="management-grid">
+
+        <!-- Requests -->
+
+        <article class="management-card">
+
+          <span class="management-index">
+            01
+          </span>
+
+          <div class="management-icon">
+            ↗
+          </div>
+
+          <h3>
+            Customer requests
+          </h3>
+
+          <p>
+            Review incoming requests, accept them, reject them,
+            or suggest another available date.
+          </p>
+
+          <button type="button">
+            View requests →
+          </button>
+
+        </article>
+
+
+        <!-- Orders -->
+
+        <article class="management-card">
+
+          <span class="management-index">
+            02
+          </span>
+
+          <div class="management-icon">
+            →
+          </div>
+
+          <h3>
+            Current work
+          </h3>
+
+          <p>
+            Keep track of accepted work and update the progress
+            of each customer order.
+          </p>
+
+          <button type="button">
+            View orders →
+          </button>
+
+        </article>
+
+
+        <!-- Calendar -->
+
+        <article class="management-card">
+
+          <span class="management-index">
+            03
+          </span>
+
+          <div class="management-icon">
+            □
+          </div>
+
+          <h3>
+            Availability calendar
+          </h3>
+
+          <p>
+            Mark the days you are unavailable so customers can
+            request suitable dates.
+          </p>
+
+          <button type="button">
+            Manage calendar →
+          </button>
+
+        </article>
+
+
+        <!-- Products -->
+
+        <article class="management-card">
+
+          <span class="management-index">
+            04
+          </span>
+
+          <div class="management-icon">
+            +
+          </div>
+
+          <h3>
+            Products
+          </h3>
+
+          <p>
+            Add and manage the products or services currently
+            offered by your business.
+          </p>
+
+          <button type="button">
+            Manage products →
+          </button>
+
+        </article>
+
+
+        <!-- Messages -->
+
+        <article class="management-card">
+
+          <span class="management-index">
+            05
+          </span>
+
+          <div class="management-icon">
+            ••
+          </div>
+
+          <h3>
+            Customer messages
+          </h3>
+
+          <p>
+            Communicate directly with customers about requests,
+            products and delivery details.
+          </p>
+
+          <button type="button">
+            Open messages →
+          </button>
+
+        </article>
+
+
+        <!-- Earnings -->
+
+        <article class="management-card">
+
+          <span class="management-index">
+            06
+          </span>
+
+          <div class="management-icon">
+            ₹
+          </div>
+
+          <h3>
+            Earnings
+          </h3>
+
+          <p>
+            View money received, pending payments and completed
+            business transactions.
+          </p>
+
+          <button type="button">
+            View earnings →
+          </button>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STOREFRONT
+         ===================================================== -->
+
+    <section class="storefront-card">
+
+      <div class="storefront-content">
+
+        <span class="summary-label">
+          YOUR STOREFRONT
+        </span>
+
+        <h2>
+          See how customers will experience your business.
+        </h2>
+
+        <p>
+          Preview your public NearNest page and decide how your
+          business story, products and visual identity should appear
+          to nearby customers.
+        </p>
+
+        <div class="storefront-actions">
+
+          <button type="button" class="storefront-primary">
+            Preview my storefront ↗
+          </button>
+
+          <button type="button" class="storefront-secondary">
+            Customize appearance
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="storefront-preview">
+
+        <div class="preview-browser">
+
+          <div class="preview-browser-top">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="preview-page">
+
+            <div class="preview-logo">
+
+              <img
+                *ngIf="logoPreview"
+                [src]="logoPreview"
+                alt=""
+              />
+
+              <span *ngIf="!logoPreview">
+                {{ businessName.charAt(0).toUpperCase() || 'B' }}
+              </span>
+
+            </div>
+
+            <span>
+              {{ category }}
+            </span>
+
+            <h3>
+              {{ businessName }}
+            </h3>
+
+            <small>
+              {{ location }}
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         YOUR WORK
+         ===================================================== -->
+
+    <section class="dashboard-section">
+
+      <div class="section-title">
+
+        <div>
+
+          <span>
+            YOUR WORK
+          </span>
+
+          <h2>
+            Show people what you make.
+          </h2>
+
+        </div>
+
+        <button
+          type="button"
+          (click)="editProfile()"
+        >
+          Add photos →
+        </button>
+
+      </div>
+
+
+      <div
+        class="dashboard-work"
+        *ngIf="workPhotoPreviews.length > 0"
+      >
+
+        <div
+          class="dashboard-work-photo"
+          *ngFor="let photo of workPhotoPreviews"
+        >
+
+          <img
+            [src]="photo"
+            alt="Business work"
+          />
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="empty-work"
+        *ngIf="workPhotoPreviews.length === 0"
+      >
+
+        <span>
+          +
+        </span>
+
+        <strong>
+          Add your first work photo
+        </strong>
+
+        <p>
+          Give customers a glimpse of what makes
+          your business special.
+        </p>
+
+      </div>
+
+    </section>
+
+
+  </div>
+
+</div>
+
+</main>
+    </div>
+
+  </ng-template>
+
+</div>
