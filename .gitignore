@@ -44,3 +44,7 @@ Thumbs.db
 # Local Spring configuration
 application-local.properties
 application-local.yml
+
+# Backend generated/uploaded files
+backend/uploads/
+backend/startup-error.txt
