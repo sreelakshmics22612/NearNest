@@ -829,7 +829,10 @@
             }}
 
           </button>
-
+          <button class="logout-btn" (click)="logout()">
+            Logout
+          <span>↗</span>
+          </button>
         </div>
 
       </header>
@@ -1122,18 +1125,18 @@
 
     <aside class="calendar-side-card">
 
-      <span class="summary-label">
+<span class="summary-label">
         SELECTED DATE
       </span>
 
-      <ng-container *ngIf="selectedCalendarDate; else noDateSelected">
+      <ng-container *ngIf="selectedCalendarDate">
 
         <h3>
           {{ selectedCalendarDate | date:'EEEE, d MMMM yyyy' }}
         </h3>
 
         <div
-          class="calendar-status"
+          class="calendar-status calendar-selected-status"
           [class.is-unavailable]="
             isDateUnavailable(selectedCalendarDate)
           "
@@ -1147,57 +1150,89 @@
           }}
         </div>
 
+        <!-- UNAVAILABLE DATE -->
+        <ng-container *ngIf="isDateUnavailable(selectedCalendarDate)">
 
-        <div class="calendar-reason-field">
+          <div class="calendar-unavailable-details">
 
-          <label for="unavailableReason">
-            Reason
-            <span>Optional</span>
-          </label>
+            <div class="calendar-reason-display">
+              <div class="reason-heading">
+                <label>REASON</label>
+                <span>Saved availability note</span>
+              </div>
 
-          <textarea
-            id="unavailableReason"
-            [(ngModel)]="unavailableReason"
-            rows="4"
-            placeholder="Add a reason for this unavailable date"
-          ></textarea>
+              <div class="saved-reason">
+                {{ unavailableReason || 'No reason provided.' }}
+              </div>
+            </div>
 
-        </div>
+          </div>
 
+          <div class="calendar-actions calendar-unavailable-actions">
 
-        <div class="calendar-actions">
+            <button
+              type="button"
+              class="calendar-edit-action"
+              (click)="editUnavailableReason()"
+            >
+              Edit reason →
+            </button>
 
-          <button
-            type="button"
-            class="calendar-primary-action"
-            [disabled]="calendarSaving"
-            (click)="markSelectedDateUnavailable()"
-          >
-            {{
-              calendarSaving
-                ? 'Saving...'
-                : 'Mark unavailable'
-            }}
-          </button>
+            <button
+              type="button"
+              class="calendar-secondary-action"
+              [disabled]="calendarSaving"
+              (click)="makeSelectedDateAvailable()"
+            >
+              {{ calendarSaving ? 'Updating...' : 'Make available' }}
+            </button>
 
-          <button
-            type="button"
-            class="calendar-secondary-action"
-            [disabled]="
-              calendarSaving ||
-              !isDateUnavailable(selectedCalendarDate)
-            "
-            (click)="makeSelectedDateAvailable()"
-          >
-            Make available
-          </button>
+          </div>
 
-        </div>
+        </ng-container>
+
+        <!-- AVAILABLE DATE -->
+        <ng-container *ngIf="!isDateUnavailable(selectedCalendarDate)">
+
+          <div class="calendar-reason-field">
+
+            <label for="unavailableReason">
+              Reason
+              <span>Optional</span>
+            </label>
+
+            <textarea
+              id="unavailableReason"
+              [(ngModel)]="unavailableReason"
+              rows="4"
+              placeholder="Add a reason for this unavailable date"
+            ></textarea>
+
+          </div>
+
+          <div class="calendar-actions">
+
+            <button
+              type="button"
+              class="calendar-primary-action"
+              [disabled]="calendarSaving"
+              (click)="markSelectedDateUnavailable()"
+            >
+              {{
+                calendarSaving
+                  ? 'Saving...'
+                  : 'Mark unavailable'
+              }}
+            </button>
+
+          </div>
+
+        </ng-container>
 
       </ng-container>
 
-
-      <ng-template #noDateSelected>
+      <!-- NO DATE SELECTED -->
+      <ng-container *ngIf="!selectedCalendarDate">
 
         <div class="calendar-empty-state">
 
@@ -1216,11 +1251,10 @@
 
         </div>
 
-      </ng-template>
+      </ng-container>
 
-
-      <div
-        class="calendar-message"
+            <div
+        class="calendar-message" 
         *ngIf="calendarMessage"
       >
         {{ calendarMessage }}
@@ -1232,6 +1266,462 @@
 
 </section>
 
+
+<!-- =====================================================
+     PRODUCTS MANAGEMENT
+     ===================================================== -->
+
+<section
+  class="products-section"
+  *ngIf="activeSection === 'products'"
+>
+
+  <!-- ===================================================
+       PRODUCTS HEADER
+       =================================================== -->
+
+  <div class="products-header">
+
+    <div>
+      <span class="dashboard-eyebrow">
+        YOUR PRODUCTS
+      </span>
+
+      <h2>
+        Show people <em>what you offer.</em>
+      </h2>
+
+      <p>
+        Add and manage the products or services customers
+        can discover through your NearNest business profile.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="product-add-button"
+      (click)="openAddProduct()"
+    >
+      + Add product
+    </button>
+
+  </div>
+
+
+  <!-- ===================================================
+       PRODUCT FORM
+       =================================================== -->
+
+  <div
+    class="product-form-overlay"
+    *ngIf="showProductForm"
+  >
+
+    <div class="product-form-card">
+
+      <div class="product-form-heading">
+
+        <div>
+
+          <span class="summary-label">
+            {{ editingProductIndex !== null
+              ? 'EDIT PRODUCT'
+              : 'NEW PRODUCT'
+            }}
+          </span>
+
+          <h3>
+            {{ editingProductIndex !== null
+              ? 'Update your product.'
+              : 'Add something to your storefront.'
+            }}
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           PRODUCT FORM GRID
+           ================================================= -->
+
+      <div class="product-form-grid">
+
+        <!-- PRODUCT NAME -->
+
+        <label>
+
+          <span>
+            PRODUCT NAME
+          </span>
+
+          <input
+            type="text"
+            name="productName"
+            [(ngModel)]="newProduct.name"
+            placeholder="e.g. Handmade Coconut Cake"
+            maxlength="150"
+            autocomplete="off"
+          />
+
+        </label>
+
+
+        <!-- CATEGORY -->
+
+        <label>
+
+          <span>
+            CATEGORY
+          </span>
+
+          <input
+            type="text"
+            name="productCategory"
+            [(ngModel)]="newProduct.category"
+            placeholder="e.g. Bakery"
+            maxlength="100"
+            autocomplete="off"
+          />
+
+        </label>
+
+
+        <!-- PRICE -->
+
+        <label>
+
+          <span>
+            PRICE (₹)
+          </span>
+
+          <input
+            type="number"
+            name="productPrice"
+            [(ngModel)]="newProduct.price"
+            min="0.01"
+            step="0.01"
+            placeholder="500"
+          />
+
+        </label>
+
+
+        <!-- IMAGE -->
+
+        <label>
+
+          <span>
+            IMAGE
+          </span>
+
+          <input
+            type="file"
+            name="productImage"
+            accept="image/*"
+            (change)="onProductImageSelected($event)"
+          />
+
+        </label>
+
+
+        <!-- IMAGE PREVIEW -->
+
+        <div
+          class="product-image-preview"
+          *ngIf="productImagePreview"
+        >
+
+          <img
+            [src]="productImagePreview"
+            alt="Product preview"
+          />
+
+          <button
+            type="button"
+            class="remove-product-image"
+            (click)="removeProductImage()"
+          >
+            Remove image
+          </button>
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <label class="product-form-full">
+
+          <span>
+            DESCRIPTION
+          </span>
+
+          <textarea
+            name="productDescription"
+            [(ngModel)]="newProduct.description"
+            rows="5"
+            maxlength="1000"
+            placeholder="Tell customers what makes this product special."
+          ></textarea>
+
+        </label>
+
+
+        <!-- AVAILABILITY -->
+
+        <label class="product-availability">
+
+          <input
+            type="checkbox"
+            name="productAvailable"
+            [(ngModel)]="newProduct.available"
+          />
+
+          <span>
+            Product is currently available
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <!-- =================================================
+           FORM ACTIONS
+           ================================================= -->
+
+      <div class="product-form-actions">
+
+        <button
+          type="button"
+          class="product-secondary-button"
+          [disabled]="isSaving"
+          (click)="closeProductForm()"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          type="button"
+          class="product-primary-button"
+          [disabled]="isSaving"
+          (click)="saveProduct()"
+        >
+
+          <span *ngIf="!isSaving">
+            {{ editingProductIndex !== null
+              ? 'Update product'
+              : 'Save product'
+            }}
+          </span>
+
+          <span *ngIf="isSaving">
+            Saving...
+          </span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================
+       PRODUCT SUMMARY
+       =================================================== -->
+
+  <div class="product-summary-strip">
+
+    <div>
+
+      <span>
+        PRODUCTS
+      </span>
+
+      <strong>
+        {{ getProductCount() }}
+      </strong>
+
+    </div>
+
+
+    <div>
+
+      <span>
+        ACTIVE
+      </span>
+
+      <strong>
+        {{ getActiveProductCount() }}
+      </strong>
+
+    </div>
+
+
+    <div>
+
+      <span>
+        UNAVAILABLE
+      </span>
+
+      <strong>
+        {{ getUnavailableProductCount() }}
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================
+       PRODUCT LIST
+       =================================================== -->
+
+  <div
+    class="products-list"
+    *ngIf="products.length > 0"
+  >
+
+    <article
+      class="product-card"
+      *ngFor="let product of products; let i = index"
+    >
+
+      <!-- PRODUCT IMAGE -->
+
+      <div class="product-card-image">
+
+        <img
+          *ngIf="product.imageUrl"
+          [src]="product.imageUrl"
+          [alt]="product.name"
+        />
+
+        <div
+          *ngIf="!product.imageUrl"
+          class="product-card-image-placeholder"
+        >
+          No image
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT INFORMATION -->
+
+      <div class="product-card-content">
+
+        <span class="product-card-category">
+          {{ product.category }}
+        </span>
+
+        <h3>
+          {{ product.name }}
+        </h3>
+
+        <p>
+          {{ product.description }}
+        </p>
+
+        <strong class="product-card-price">
+          ₹{{ product.price | number:'1.2-2' }}
+        </strong>
+
+
+        <!-- AVAILABILITY -->
+
+        <span
+          class="product-availability-status"
+          [class.unavailable]="!product.available"
+        >
+          {{ product.available
+            ? 'Available'
+            : 'Unavailable'
+          }}
+        </span>
+
+
+        <!-- ACTIONS -->
+
+        <div class="product-card-actions">
+
+          <button
+            type="button"
+            (click)="editProduct(i)"
+          >
+            Edit
+          </button>
+
+
+          <button
+            type="button"
+            (click)="toggleProductAvailability(i)"
+          >
+            {{ product.available
+              ? 'Mark unavailable'
+              : 'Make available'
+            }}
+          </button>
+
+
+          <button
+            type="button"
+            (click)="deleteProduct(i)"
+          >
+            Delete
+          </button>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <!-- ===================================================
+       EMPTY STATE
+       =================================================== -->
+
+  <div
+    class="products-empty-card"
+    *ngIf="products.length === 0 && !showProductForm"
+  >
+
+    <div class="products-empty-mark">
+      +
+    </div>
+
+    <span class="summary-label">
+      YOUR STOREFRONT IS WAITING
+    </span>
+
+    <h3>
+      Add your first product.
+    </h3>
+
+    <p>
+      Products you add here will be displayed to customers
+      on your NearNest storefront with their name, price,
+      description and image.
+    </p>
+
+    <button
+      type="button"
+      class="product-empty-button"
+      (click)="openAddProduct()"
+    >
+      Add your first product
+    </button>
+
+  </div>
+
+</section>
 
 <!-- =====================================================
      OWNER OVERVIEW
@@ -1509,8 +1999,7 @@
 
         <!-- Calendar -->
 
-        <article class="management-card">
-
+        <article class="management-card" (click)="setActiveSection('calendar')">
           <span class="management-index">
             03
           </span>
@@ -1528,10 +2017,12 @@
             request suitable dates.
           </p>
 
-          <button type="button">
-            Manage calendar →
+          <button
+            type="button"
+            (click)="setActiveSection('calendar')"
+            >
+             Manage calendar →
           </button>
-
         </article>
 
 
@@ -1790,3 +2281,4 @@
   </ng-template>
 
 </div>
+
